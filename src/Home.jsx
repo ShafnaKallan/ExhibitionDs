@@ -20,6 +20,7 @@ import { FaPhoneFlip } from "react-icons/fa6";
 import { storeData } from "./api/Api";
 
 
+
 const Home = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [textPopUp, settextPopUp] = useState(false);
@@ -123,7 +124,7 @@ const Home = () => {
 
   return (
     <div className="body">
-      <div className="dslogo">
+      <div className="dslogo" >
         <img src={ds} alt="" />
       </div>
 
@@ -155,7 +156,7 @@ const Home = () => {
                     </div>
                     <div class="col box" onClick={showWhatsapp}>
                       <h4>BULK WHATSAPP MESSAGING</h4>
-                      <img src={whatsapp} alt="" height={30} />
+                      <img src={whatsapp}  alt="" height={30} />
                     </div>
                     <div class="w-100  "></div>
                     <div class="col box" onClick={showHisabuk}>
@@ -205,7 +206,6 @@ const Home = () => {
                     <input
                       type="submit"
                       value="Login"
-                      // onClick={() => setServicePopup(true)}
                     />
                     {/* <div class="links">
                 <a href="#">Forgot Password?</a>
@@ -362,7 +362,6 @@ const Home = () => {
                             maxLength={10}
                             pattern="[0-9]{10}"
                             required
-                            
                           />
                         </div>
                         <div class="form-group">
@@ -371,7 +370,6 @@ const Home = () => {
                             class="form-control"
                             id="language"
                             name="language"
-                            
                           >
                             <option value="">Select Language</option>
                             <option value="en">English</option>
@@ -775,7 +773,7 @@ const Home = () => {
       )}
 
 <a
-      href="https://www.datastoneglobal.com/"
+      href="https://api.whatsapp.com/send?phone=+919747194333"
       class="float"
       target="_blank"
     >
@@ -785,7 +783,7 @@ const Home = () => {
     </a> 
  
     <a
-      href="https://api.whatsapp.com/send?phone=919895238820"
+       href="https://www.datastoneglobal.com/"
       class="float2"
       target="_blank"
     >
