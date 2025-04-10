@@ -1,9 +1,14 @@
-.body{
+/* .body{
    
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    
+}
+body, html {
+  overflow: hidden;
+
 }
 .banner {
     background-image: url(../src/assets/Group\ 3.png);
@@ -13,7 +18,47 @@
    height: 100vh;
    display: flex;
    justify-content: center;
-    align-items: center;  
+    align-items: center; 
+    
+} */
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-image: url(.//assets/Group\ 3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.banner{
+ 
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+ 
+} 
+.box{
+  background-color: rgb(16, 154, 218);
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 5px;
+}
+.dslogo{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+ 
+}
+@media screen and (max-width: 700px) {
+  body{
+      background-image: none;
+  }
+  .dslogo img{
+      height: 100px;
+  }
 }
 .popup-link {
   cursor: pointer;
@@ -40,13 +85,15 @@
   align-items: center; */
   z-index: 1000; /* Ensure it's on top of other content */
   border-radius: 25px;
+  background-color: rgb(0, 0, 0);
+/* Prevents overflow */
   
 }
 
 /* Popup Content */
 .popup-content {
   /* background: rgb(15, 110, 148); */
-  background-image: url(../src/assets//2202758.jpg);
+  background-image: url(../src/assets//Group\ 2\ \(1\).png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -79,6 +126,10 @@
   
     text-align: left;
    
+}
+
+.text-banner{
+ 
 }
 /* Close Button */
 .popup-close {
@@ -124,6 +175,7 @@
     align-items: center;
     flex-direction: column;
     cursor: pointer;
+   
   }
   
 .dslogo{
@@ -132,6 +184,23 @@
     left: 50%;
     transform: translateX(-50%);
    
+}
+.popup1 {
+  position: fixed;
+  top: 50%; /* Start from the vertical center of the screen */
+  left: 50%; /* Start from the horizontal center of the screen */
+  transform: translate(-50%, -50%); /* Adjust the position to truly center it */
+  width: 80%; /* Adjust width as needed */
+  height: 90%;/* Half of the window height */
+  background: rgba(0, 0, 0, 0.5); /* Reduced opacity for a less visible background */
+  /* display: flex;
+  justify-content:center;
+  align-items: center; */
+  z-index: 1000; /* Ensure it's on top of other content */
+  border-radius: 25px;
+  background-color: rgb(0, 0, 0);
+  overflow: hidden; /* Prevents overflow */
+  
 }
 
 .popup-content1 {
@@ -176,27 +245,178 @@
     justify-content: center;
     align-items: center;
 }
+.robot img{
+  height: 300px;
+}
 
   .overlay {
     width: auto;
-    height: 30rem;
+    height: auto;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7); 
+    background-color: rgba(129, 16, 16, 0.7); 
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 25px;
-  
+   padding: 30px;
     
   }
-  .banner2{
+
+
+  /* .banner2{
     background-image: url(../src/assets/26316.jpg);
    
+  } */
+
+  .popup-content2 {
+    background-image: url(../src/assets/whtasp.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    /* Full width of the popup */
+   width: 100%; /* Full height of the popup */
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if the content is too long */
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+
   }
+
+
+  .popup-content4 {
+    background-image: url(../src/assets/26316.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    /* Full width of the popup */
+   width: 100%; /* Full height of the popup */
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if the content is too long */
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+
+  }
+  .popup-content4 h1{
+    margin-bottom: 70px;
+   }
+  @media screen and (max-width: 896px) {
+   
+    .popup-content4{
+      padding: 10px;
+
+    }
+    .popup-content4 h1{
+     margin-bottom: 10px;
+    }
+    .popup-content4 h3{
+      margin-bottom: 5px;
+     }
+    
+  }
+
+  .popup-content3 {
+    background-image: url(../src/assets/Group\ 1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    /* Full width of the popup */
+   width: 100%; /* Full height of the popup */
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if the content is too long */
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+
+  }
+  @media screen and (max-width: 730px) {
+   
+    .popup-content3{
+      padding: 10px;
+
+    }
+    .popup-content3 h1{
+     margin-bottom: 10px;
+    }
+    .popup-content3 h3{
+      margin-bottom: 5px;
+     }
+  }
+  .popup-content5 {
+    background-image: url(../src/assets/whatsapp-icon-line-connection-circuit-board.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    /* Full width of the popup */
+   width: 100%; /* Full height of the popup */
+    padding: 40px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow scrolling if the content is too long */
+    color: rgb(255, 255, 255);
+    border-radius: 25px;
+    display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+  
+
+  }
+  .whatsapp-box{
+    background-color: rgba(0, 3, 34, 1);
+    padding: 70px;
+
+  }
+  .whatsapp-box h1{
+    padding-bottom: 40px;
+  }
+
+  @media screen and (max-width: 896px) {
+   body{
+    overflow: hidden;
+   }
+    .popup-content2{
+      padding: 10px;
+
+    }
+    .whatsapp-box{
+      background-color: rgba(0, 3, 34, 1);
+      padding: 10px;
+    
+  
+    }
+    .whatsapp-box h1{
+      padding-bottom: 10px;
+    }
+    .popup-content5{
+      padding: 5px
+    }
+  
+  }
+  
   
   .container:before {
     content: "";
@@ -217,6 +437,13 @@
    
    
   }
+  @media screen and (max-width: 896px) {
+    .login > h1{
+      font-size: 1.8rem;
+    }
+  .login{
+    padding: 1rem;
+  }}
   
   .login-form {
     display: flex;
@@ -287,7 +514,9 @@
 
   
 @media screen and (max-width: 700px) {
-   
+   .popup-content{
+    padding: 10px;
+   }
     .box h4{
         font-size: 12px;
     }
@@ -296,26 +525,150 @@
         height: 50px;
     }
    .dslogo img{
-       width: 200px;
+       width: 120px;
    }
    .banner{
     background-image: none;
    }
+   .dslogo{
+  
+    position: absolute;
+    left: 20%;
+ 
+   
+} 
+.login {
+  padding: 0rem;
+
+ 
+ 
+}
+.robot img{
+  height: 300px;
+}
+.box {
+ 
+  padding: 15px;
+  
+}
+.box img{
+ 
+  height: 30px;
+  width: 30px;
+}
+.popup-content1 h2 {
+  margin-bottom: 10px;
+  font-size: 36px; /* Adjust this value to control the space between h4 elements */
+}
+.popup-content1 h4 , h3{
+  margin-bottom: 15px; /* Adjust this value to control the space between h4 elements */
+}
+.whatsapp-box{
+ 
+  padding: 10px;
+
+}
+.whatsapp-box h1{
+  padding-bottom: 20px;
+}
+  .popup-content5 h1,h3{
+font-size: 16px;
+  }
+
 }
 
-@media screen and (max-width: 1800px) {
+
+@media screen and (max-width: 1200px) {
     .popup-inner{
-        background-color:rgb(22, 118, 173);
+        background-image: none;
       
     }
     .popup-inner h4 {
-        margin-bottom: 15px; /* Adjust this value to control the space between h4 elements */
+        margin-bottom: 35px; /* Adjust this value to control the space between h4 elements */
       }
-     
+      .popup-inner{
+
+      }
+      
 }
 @media screen and (max-width: 900px) {
-    .popup-content {
+    .popup-content , .popup-content1, .popup-content3, .popup-content4{
         background-image: none;
       }
+      .popup{
+        height: 70%;
+      }
+      .popup2{
+        height: 80%;
+        width: 90%;
+        overflow: hidden;
+      }
+      .popup-2{
+        color: white;
+      }
+      
+     
+}
+@media screen and (max-width: 1600px) {
+
+}
+@media screen and (max-width: 1300px) {
+  .popup-content1 h2{
+    margin-bottom: 1px;
+  }
+  .popup-content1 h3 ,h4 {
+    margin-bottom: 10px;
+    font-size: 18px; /* Adjust this value to control the space between h4 elements */
+  } 
+  .popup-content4 h1{
+    margin-bottom: 10px;
+  }
+  .popup-content4 h3 ,h4 {
+    margin-bottom: 20px;
+    font-size: 16px; /* Adjust this value to control the space between h4 elements */
+  } 
+  .text-inner{
+    padding-inline: 10px;
+     width: 100%;
+   }
+ 
+ .popup-content1 h4 , h3{
+     margin-bottom: 25px; /* Adjust this value to control the space between h4 elements */
+   }
+ 
+   .login > h1 {
+  
+    font-size: 1.8rem;
+  }
+  .login-form > label {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 600;
+  }
+  
+  .login-form > input {
+   
+    font-size: 1.1em;
+  
+  }
+  .login-form > input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+ 
+  .login-form > input:last-of-type {
+    margin-bottom: 1rem;
+  }
+  
+  .whatsapp-box{
+   
+    padding: 20px;
+
+  }
+  .whatsapp-box h1{
+    padding-bottom: 40px;
+  }
+  
+
 }
 
