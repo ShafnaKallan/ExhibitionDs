@@ -15,7 +15,8 @@ import "animate.css";
 import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa6";
 import { FaPhoneFlip } from "react-icons/fa6";
-
+import bnilogo from "./assets/bnilogo.png";
+import { IoClose } from "react-icons/io5";
 
 const Home = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -66,23 +67,44 @@ const Home = () => {
 
   return (
     <div className="body">
-      <div className="dslogo" >
+      {/* <div class="wrap">
+  <div class="wrapv">
+    <div class="vertical">
+      A <span style={{color:"#0089CD"}}><b>partner</b>  </span>  in Your  <span style={{color:"#8DC73E"}}> <b> Progress</b> </span>
+    </div>
+  </div>
+</div> */}
+      <div className="dslogo ">
         <img src={ds} alt="" />
+        <div className="caption ">
+          <h4>
+            {" "}
+            A{" "}
+            <span style={{ color: "#0089CD" }}>
+              <b>partner</b>{" "}
+            </span>{" "}
+            in Your{" "}
+            <span style={{ color: "#8DC73E" }}>
+              {" "}
+              <b> Progress</b>{" "}
+            </span>
+          </h4>
+        </div>
       </div>
 
       <div className="banner">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <div className="robot d-md-none">
-                <img src={robot} alt="" height={230} />
+              <div className="robot d-sm-none mt-2">
+                {/* <img src={robot} alt="" height={230} /> */}
+                <img src={bnilogo} alt="" height={230} />
               </div>
             </div>
             <div className="col-md-6 login-container">
               {servicePopup ? (
                 <div class="container">
                   <div class="row">
-                 
                     <div class="col box" onClick={showPopup}>
                       <h4>WEB DESIGN & DEVELOPMENT</h4>
                       <img src={mobile} alt="" height={30} />
@@ -98,7 +120,7 @@ const Home = () => {
                     </div>
                     <div class="col box" onClick={showWhatsapp}>
                       <h4>BULK WHATSAPP MESSAGING</h4>
-                      <img src={whatsapp}  alt="" height={30} />
+                      <img src={whatsapp} alt="" height={30} />
                     </div>
                     <div class="w-100  "></div>
                     <div class="col box" onClick={showHisabuk}>
@@ -200,8 +222,8 @@ const Home = () => {
                   style={{ animationDelay: "0.4s" }}
                 >
                   {" "}
-                  <FaAnglesRight style={{ marginRight: "8px" }} />E commerce
-                  Website
+                  <FaAnglesRight style={{ marginRight: "8px" }} />
+                  E-commerce Website
                 </h4>
                 <h4
                   className="animate__animated animate__fadeInUp"
@@ -223,8 +245,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-
-     
       )}
 
       {textPopUp && (
@@ -711,26 +731,22 @@ const Home = () => {
         </div>
       )}
 
-<a
-     
-      href="https://api.whatsapp.com/send?phone=+919747194333"
-      class="float"
-      target="_blank"
-    >
-    {/* <i class="fa-brands fa-whatsapp my-float"></i> */}
-    <i className="fa-brands fa-whatsapp my-float"><FaWhatsapp className="call-icon"/></i>
-    
-    </a> 
- 
-    <a
-       href="https://www.datastoneglobal.com/"
-      class="float2"
-      target="_blank"
-    >
- 
-    <i className="fa-brands fa-whatsapp my-float"><FaPhoneFlip className="call-icon"/></i>
-    
-    </a> 
+      <a
+        href="https://api.whatsapp.com/send?phone=+919747194333"
+        class="float"
+        target="_blank"
+      >
+        {/* <i class="fa-brands fa-whatsapp my-float"></i> */}
+        <i className="fa-brands fa-whatsapp my-float">
+          <FaWhatsapp className="call-icon" />
+        </i>
+      </a>
+
+      <a href="tel:+919747194333" class="float2" target="_blank">
+        <i className="fa-brands fa-whatsapp my-float">
+          <FaPhoneFlip className="call-icon" />
+        </i>
+      </a>
       {/* <div class="whats-float">
         <a href="https://wa.me/+919747194333" target="_blank">
           {" "}
@@ -741,8 +757,26 @@ const Home = () => {
           </span>{" "}
         </a>
       </div> */}
+      <div class="drop-shadow ">
+        <div class="popup-box">
+          <div class="alert-msg">
+            <button class="close-btn" onclick="closePopup()">
+              ×
+            </button>
+          </div>
+          <div className="popup-data">
+            <h1>Delete Your Account?</h1>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Home;
+{
+  /* <div class="buttons">
+      <button>Yes</button>
+      <button>No</button>
+    </div> */
+}
