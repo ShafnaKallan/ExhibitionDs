@@ -1,9 +1,7 @@
 import React, { useState ,useEffect} from "react";
-import { useRef } from "react";
 
-import "./style.css";
+import "./Home.css";
 import ds from "./assets/ds.png";
-import robot from "./assets/Group 6.png";
 import logomain from "./assets/logoMain 6.png";
 import mobile from "./assets/design.png";
 import schola from "./assets/Group 3(1).png";
@@ -12,14 +10,14 @@ import whatsapp from "./assets/whatsapp.png";
 import phone from "./assets/phone.png";
 import { FaAnglesRight } from "react-icons/fa6";
 import scholalogo from "./assets/schola-logo.png";
+import bnilogo from "./assets/bnilogo.png";
 import { FaCircle } from "react-icons/fa6";
 import "animate.css";
-import { Link } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa6";
 import { FaPhoneFlip } from "react-icons/fa6";
-import { storeData } from "./api/Api";
-
-
+import { getData, sendRec, sendTts, storeData } from "./api/Api";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -29,27 +27,104 @@ const Home = () => {
   const [ScholaPopUp, setScholaPopUp] = useState(false);
   const [whatsappPopUp, setWhatsappPopUp] = useState(false);
   const [servicePopup, setServicePopup] = useState(false);
+  
+  const [phone_number, setPhoneNumber] = useState("");
+  const [name, setName] = useState("");
 
   const [countdown, setCountdown] = useState(0); //added
+  const [countdown2, setCountdown2] = useState(0); //added
 
+
+  // const showMessage = () => {
+  //   return (
+  //     <div className="alert alert-success">Sucessfully sented.</div>
+  //     );
+  // }
   useEffect(() => {
+    
     const token = localStorage.getItem("access_token");
     if (token && token !== "undefined") {
       setServicePopup(true);
+
+      const lastTtsSubmit = localStorage.getItem("lastTtsSubmit");
+      const lastRecSubmit = localStorage.getItem("lastRecSubmit");
+      if (lastTtsSubmit) {
+      const now = Date.now();
+      const timePassed = now - parseInt(lastTtsSubmit);
+
+      if (timePassed < 60000) {
+        const timeLeft = 60000 - timePassed;
+        // setError("Please wait 1 minute before trying again.");
+        setCountdown(Math.floor(timeLeft / 1000)); //added
+        const interval = setInterval(() => {
+          setCountdown((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval);
+              // setError("");
+              localStorage.removeItem("lastTtsSubmit");
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+          return () => clearInterval(interval);
+        }
+      }
+      if (lastRecSubmit) {
+      const now2 = Date.now();
+      const timePassed2 = now2 - parseInt(lastRecSubmit);
+
+      if (timePassed2 < 60000) {
+        const timeLeft2 = 60000 - timePassed2;
+        // setError("Please wait 1 minute before trying again.");
+        setCountdown2(Math.floor(timeLeft2 / 1000)); //added
+        const interval2 = setInterval(() => {
+          setCountdown2((prev) => {
+            if (prev <= 1) {
+              clearInterval(interval2);
+              // setError("");
+              localStorage.removeItem("lastRecSubmit");
+              return 0;
+            }
+            return prev - 1;
+          });
+        }, 1000);
+          return () => clearInterval(interval2);
+        }
+      }
     } else {
       setServicePopup(false);
     }
-  },[])
+  },[]);
 
   const showPopup = () => {
+    
     setPopupVisible(true);
+
   };
 
+  const initializeInfo = () => {
+
+    getData().then((res) => {
+      console.log("Info " + res.data.data.name);
+      setName(res.data.data.name);
+      setPhoneNumber(res.data.data.phone_number);
+    }).catch((error) => {
+      if(error.response.status === 401) {
+        localStorage.removeItem("access_token");
+        window.location.reload();
+      }
+    });
+  }
+
   const showPopup2 = () => {
+    initializeInfo();
     settextPopUp(true);
+    
   };
 
   const showVoicePopup = () => {
+    initializeInfo();
     setVoicePopUp(true);
   };
 
@@ -81,24 +156,19 @@ const Home = () => {
 
   //  firts popup details
 
-  const firstNameRef = useRef(null);
-  const firstPhoneRef = useRef(null);
-  const companyRef = useRef(null);
   
 
-  const handleFirstSubmit = (e) => {
-    e.preventDefault();
+  const handleFirstSubmit = (event) => {
+    event.preventDefault();
 
-    const firstName = firstNameRef.current.value;
-    const firstPhone = firstPhoneRef.current.value;
-    const company = companyRef.current.value;
     
     //  firts popup details
 
-    const data= {
-      name: firstName,
-      phone_number: firstPhone,
-      business_name: company,
+    const formData= {
+      name: event.target.name.value ?? '',
+      phone_number: event.target.phone_number.value ?? '',
+      business_name: event.target.business_name.value ?? '',
+      business_category: event.target.business_category.value ?? '',
       
     }
     
@@ -106,78 +176,195 @@ const Home = () => {
     
     // console.log(data);
     // (data);
-    storeData(data).then((response) => {
+    storeData(formData).then((response) => {
       // console.log({response});
       // debugger;
       const token  = response.data.access_token;
       localStorage.setItem("access_token", token);
       setServicePopup(true);
     })
-    .catch(error => {
+    .catch((error) => {
       // console.error('ErrorApi:', error);
-      alert("Something went wrong, please try again later");
+      toast.error("Something went wrong, please try again later");
+      
     });
 
+  }
+  const handleTimertts = () => {
+    const lastSubmit = localStorage.getItem("lastTtsSubmit");
+    const now = Date.now();
+
+    if (lastSubmit && now - parseInt(lastSubmit) < 60000) {
+      const timeLeft = 60000 - (now - parseInt(lastSubmit));
+      // setError("Please wait 1 minute before trying again.");
+      setCountdown(Math.floor(timeLeft / 1000));
+      const interval = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            // setError("");
+            localStorage.removeItem("lastTtsSubmit");
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return;
+    }
+
+    // Save current time
+    localStorage.setItem("lastTtsSubmit", now);
+    // setError("");
+    setCountdown(0); // reset countdown
+  }
+  const handleTimerRec = () => {
+    const lastSubmit = localStorage.getItem("lastRecSubmit");
+    const now = Date.now();
+
+    if (lastSubmit && now - parseInt(lastSubmit) < 60000) {
+      const timeLeft = 60000 - (now - parseInt(lastSubmit));
+      // setError("Please wait 1 minute before trying again.");
+      setCountdown2(Math.floor(timeLeft / 1000));
+      const interval = setInterval(() => {
+        setCountdown2((prev) => {
+          if (prev <= 1) {
+            clearInterval(interval);
+            // setError("");
+            localStorage.removeItem("lastRecSubmit");
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return;
+    }
+
+    // Save current time
+    localStorage.setItem("lastRecSubmit", now);
+    // setError("");
+    setCountdown2(0); // reset countdown
+  }
+
+  const handleTts = (event) => {
+    event.preventDefault();
+    setName("");
+    setPhoneNumber("");
+    handleTimertts();
+    const formData = {
+      name: event.target.name.value ?? '',
+      phone_number: event.target.phone_number.value ?? '',
+      language: event.target.language.value ?? '',
+    }
+    sendTts(formData).then((response) => {
+      // set timer
+      closePopup();
+      toast.success("Call sent to phone number");
+      
+    }).catch((error) => {
+      if(error.response.status === 401) {
+        localStorage.removeItem("access_token");
+        window.location.reload();
+      }else{
+        // alert("Something went wrong, please try again later");
+        toast.error("Something went wrong, please try again later");
+        closePopup();
+      }
+    })
+    // console.log(formData);
+    
+  }
+
+  const handleRecVoice = (event) => {
+    event.preventDefault();
+    // fields set null
+    setName("");
+    setPhoneNumber("");
+    handleTimerRec();
+    const formData = {
+      phone_number: event.target.phone_number.value ?? '',
+    }
+    sendRec(formData).then((res) => {
+      // set timer
+      closePopup();
+      toast.success("Call sent to phone number");
+    }).catch((error) => {
+
+      if(error.response.status === 401) {
+        localStorage.removeItem("access_token");
+        window.location.reload();
+      }else{
+
+        toast.error("Something went wrong, please try again later");
+        closePopup();
+      }
+    })
   }
 
 
 
+
   return (
+    
     <div className="body">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="dslogo" >
         <img src={ds} alt="" />
+        <div className="caption ">
+<h4>          A <span style={{color:"#0089CD"}}><b>partner</b>  </span>  in Your  <span style={{color:"#8DC73E"}}> <b> Progress</b> </span>
+</h4>
+</div>
       </div>
 
       <div className="banner">
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <div className="robot d-md-none">
-                <img src={robot} alt="" height={230} />
+              <div className="robot d-sm-none mt-2">
+                <img src={bnilogo} alt="" height={230} />
               </div>
             </div>
             <div className="col-md-6 login-container">
               {servicePopup ? (
-                <div class="container">
-                  <div class="row">
+                <div className="container">
+                  <div className="row">
                  
-                    <div class="col box" onClick={showPopup}>
+                    <div className="col box" onClick={showPopup}>
                       <h4>WEB DESIGN & DEVELOPMENT</h4>
                       <img src={mobile} alt="" height={30} />
                     </div>
-                    <div class="col box" onClick={showPopup2}>
+                    <div className="col box" onClick={showPopup2}>
                       <h4>BULK TEXT TO VOICE CALL</h4>
                       <img src={phone} alt="" height={30} />
                     </div>
-                    <div class="w-100  "></div>
-                    <div class="col box" onClick={showVoicePopup}>
+                    <div className="w-100  "></div>
+                    <div className="col box" onClick={showVoicePopup}>
                       <h4>BULK RECORDED VOICE CALL</h4>
                       <img src={microphone} alt="" height={30} />
                     </div>
-                    <div class="col box" onClick={showWhatsapp}>
+                    <div className="col box" onClick={showWhatsapp}>
                       <h4>BULK WHATSAPP MESSAGING</h4>
                       <img src={whatsapp}  alt="" height={30} />
                     </div>
-                    <div class="w-100  "></div>
-                    <div class="col box" onClick={showHisabuk}>
+                    <div className="w-100  "></div>
+                    <div className="col box" onClick={showHisabuk}>
                       <h4>ACCOUNTS MANAGEMENT APPLICATION</h4>
                       <img src={logomain} alt="" height={30} />
                     </div>
-                    <div class="col box" onClick={showSchola}>
+                    <div className="col box" onClick={showSchola}>
                       <h4>
                         CAMPUS <br /> MANAGEMENT APPLICATION
                       </h4>
                       <img src={schola} alt="" height={30} />
                     </div>
-                    <div class="w-100  "></div>
+                    <div className="w-100  "></div>
 
-                    <div class="col box1 ">
+                    <div className="col box1 ">
                       <a href="https://datastoneglobal.com/">
                         <h4>Our Clients</h4>
                       </a>
                     </div>
 
-                    <div class="col box1 ">
+                    <div className="col box1 ">
                       <a href="https://datastoneglobal.com/portfolio.php">
                         <h4>Portfolio</h4>
                       </a>
@@ -185,29 +372,34 @@ const Home = () => {
                   </div>
                 </div>
               ) : (
-                <div class="box2">
+                <div className="box2">
                   <form action="" className="form1" onSubmit={handleFirstSubmit}>
-                    <div class="input-box">
+                    <div className="input-box">
                       <h2>Welcome to the exhibition! </h2>
-                      <input type="text" required  ref={firstNameRef}/>
-                      <span>Username</span>
+                      <input type="text" name="name" placeholder=" " required />
+                      <span>Name</span>
                       <i></i>
                     </div>
-                    <div class="input-box">
-                      <input type="test" minLength={10} maxLength={10} required ref={firstPhoneRef}/>
+                    <div className="input-box">
+                      <input type="number" name="phone_number" minLength={10} maxLength={10} placeholder=" " required/>
                       <span>Mobile No:</span>
                       <i></i>
                     </div>
-                    <div class="input-box">
-                      <input type="text" required ref={companyRef}/>
+                    <div className="input-box">
+                      <input type="text" name="business_name" placeholder=" " required />
                       <span>Company Name</span>
+                      <i></i>
+                    </div>
+                    <div className="input-box">
+                      <input type="text" name="business_category" placeholder=" " />
+                      <span>Business Category</span>
                       <i></i>
                     </div>
                     <input
                       type="submit"
-                      value="Login"
+                      value="Submit"
                     />
-                    {/* <div class="links">
+                    {/* <div className="links">
                 <a href="#">Forgot Password?</a>
                 <a href="#">Sign Up</a>
             </div> */}
@@ -257,7 +449,7 @@ const Home = () => {
                   style={{ animationDelay: "0.4s" }}
                 >
                   {" "}
-                  <FaAnglesRight style={{ marginRight: "8px" }} />E commerce
+                  <FaAnglesRight style={{ marginRight: "8px" }} />E-commerce
                   Website
                 </h4>
                 <h4
@@ -343,45 +535,57 @@ const Home = () => {
                   <div className="form-box">
                     <h1>Try our text to voice call service</h1>
                     <div className="">
-                      <form class="form-inline" action="/action_page.php" onSubmit={handleFirstSubmit}>
-                        <div class="form-group">
-                          <label class="sr-only" for="name" >
+                      <form className="form-inline" onSubmit={handleTts}>
+                        <div className="form-group">
+                          <label className="sr-only" for="name" >
                             Name
                           </label>
-                          <input type="email" class="form-control" id="email" />
+                          <input type="text" defaultValue={name} className="form-control" name="name" />
                         </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="pwd">
+                        <div className="form-group">
+                          <label className="sr-only" for="pwd">
                             Mobile Number
                           </label>
                           <input
-                            type="number"
-                            class="form-control"
-                            id="pwd"
+                            type="text"
+                            className="form-control"
+                            defaultValue={phone_number}
+                            name="phone_number"
                             minLength={10}
                             maxLength={10}
                             pattern="[0-9]{10}"
                             required
                           />
                         </div>
-                        <div class="form-group">
+                        <div className="form-group">
                           <label for="language">Choose Language</label>
                           <select
-                            class="form-control"
+                            className="form-control"
                             id="language"
                             name="language"
+                            required
                           >
                             <option value="">Select Language</option>
-                            <option value="en">English</option>
-                            <option value="es">malayalam</option>
-                            <option value="fr">arabic</option>
+                            <option value="en-IN-Wavenet-D">English</option>
+                            <option value="ml-IN-Wavenet-C">Malayalam</option>
+                            <option value="ar-XA-Wavenet-D">Arabic</option>
                           </select>
                         </div>
 
-                        <button type="submit" class="btn btn-default">
-                          Send
+                        <button disabled={countdown > 0} type="submit" className="btn btn-default">
+                          Call Now
                         </button>
+                        <div>
+      {/* <button onClick={() => {toast.success("Call sented to phone number", { position: "top-right" });}}>Notify</button>
+      <ToastContainer /> */}
+    </div>
                       </form>
+                      {countdown > 0 && (
+                        <p style={{ color: "orange", marginTop: "5px" }}>
+                          You can try again in {countdown} second
+                          {countdown !== 1 ? "s" : ""}.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -455,30 +659,40 @@ const Home = () => {
                 </div>
                 <div className="col-md-6 ">
                   <div className="form-box">
-                    <h1>Try our text to voice call service</h1>
+                    <h1>Try our recorded to call service</h1>
                     <div className="">
-                      <form class="form-inline" action="/action_page.php">
-                        <div class="form-group">
-                          <label class="sr-only" for="email">
+                      <form className="form-inline" onSubmit={handleRecVoice}>
+                        <div className="form-group">
+                          <label className="sr-only" for="name">
                             Name
                           </label>
-                          <input type="email" class="form-control" id="email" />
+                          <input type="text" name="name" defaultValue={name} className="form-control" id="name" />
                         </div>
-                        <div class="form-group">
-                          <label class="sr-only" for="pwd">
-                            Mobile NUmber
+                        <div className="form-group">
+                          <label className="sr-only" for="number">
+                            Mobile Number
                           </label>
                           <input
                             type="number"
-                            class="form-control"
+                            defaultValue={phone_number}
+                            name="phone_number"
+                            minLength={10}
+                            maxLength={10}
+                            className="form-control"
                             id="number"
                           />
                         </div>
 
-                        <button type="submit" class="btn btn-default">
-                          Submit
+                        <button disabled={countdown2 > 0} type="submit" className="btn btn-default">
+                          Call Now
                         </button>
                       </form>
+                      {countdown2 > 0 && (
+                        <p style={{ color: "orange", marginTop: "5px" }}>
+                          You can try again in {countdown2} second
+                          {countdown2 !== 1 ? "s" : ""}.
+                        </p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -774,27 +988,27 @@ const Home = () => {
 
 <a
       href="https://api.whatsapp.com/send?phone=+919747194333"
-      class="float"
+      className="float"
       target="_blank"
     >
-    {/* <i class="fa-brands fa-whatsapp my-float"></i> */}
+    {/* <i className="fa-brands fa-whatsapp my-float"></i> */}
     <i className="fa-brands fa-whatsapp my-float"><FaWhatsapp className="call-icon"/></i>
     
     </a> 
  
     <a
-       href="https://www.datastoneglobal.com/"
-      class="float2"
+       href="tel:+919747194333"
+      className="float2"
       target="_blank"
     >
  
     <i className="fa-brands fa-whatsapp my-float"><FaPhoneFlip className="call-icon"/></i>
     
     </a> 
-      {/* <div class="whats-float">
+      {/* <div className="whats-float">
         <a href="https://wa.me/+919747194333" target="_blank">
           {" "}
-          <i class="fa-brands fa-whatsapp"> <FaWhatsapp /></i>
+          <i className="fa-brands fa-whatsapp"> <FaWhatsapp /></i>
           <span>
             WhatsApp <br />
             <small>+ 91 9747 194 333</small>

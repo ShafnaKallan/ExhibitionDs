@@ -2,7 +2,8 @@ body{
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-image: url(.//assets/Group\ 3.png);
+  /* background-image: url(.//assets/Group\ 3.png); */
+  background-image: url(./assets/expologo.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -10,7 +11,7 @@ body{
 
 .banner{
  
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +47,9 @@ font-size: 14px;
 h3{
 font-size: 14px;
 }  
-
+.banner h4{
+  font-size: 14px;
+}
 }
 .box1{
 background: linear-gradient(55deg, #2eb2e7 0%, #64bb46 100%);
@@ -82,19 +85,34 @@ text-decoration: none;
       padding-top: 10px;
   }
   .banner h4 {
-    font-size: 18px;
+    font-size: 14px;
   }
 
 }
 @media screen and (min-width: 576px) and (max-width: 1670px) {
 .dslogo img {
-  height: 70px;
+  height: 100px;
 
 }
 .box h4{
   font-size: 18px;
 }
+.hisabuk-banner h1 {
+  font-size: 24px;
+  margin-bottom: 40px;
 }
+.hisabuk-banner h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.popup-content {
+  background-image: none;
+}
+
+}
+.caption h4{
+  font-size: 18px;
+} 
 
 .login-container{
 display: flex;
@@ -104,7 +122,7 @@ align-items: center;
 .box2{
 position: relative;
 width: 370px;
-height: 500px;
+height: 530px;
 background: #1c1c1c;
 border-radius: 50px 5px;
 overflow: hidden;
@@ -119,7 +137,7 @@ position: absolute;
 top: -50%;
 left: -50%;
 width: 370px;
-height: 450px;
+height: 490px;
 background: linear-gradient(60deg, transparent, #45f3ff, #45f3ff);
 transform-origin: bottom right;
 animation: animate 6s linear infinite;
@@ -131,7 +149,7 @@ position: absolute;
 top: -50%;
 left: -50%;
 width: 370px;
-height: 450px;
+height: 700px;
 background: linear-gradient(60deg, transparent, #d9138a, #d9138a);
 transform-origin: bottom right;
 animation: animate 6s linear infinite;
@@ -211,7 +229,7 @@ transition: .5s;
 }
 @media screen and (max-width: 576px) {
 .box2{
-  height: 400px;
+  height: 410px;
 }
 .box2 h2{
  font-size: 24px;
@@ -221,7 +239,7 @@ transition: .5s;
 
 }
 .input-box input{
-  padding: 10px 10px 10px;
+  padding: 5px 5px 5px;
 }
 .form{
   padding: 10px 10px;
@@ -230,13 +248,19 @@ transition: .5s;
 }
 
 }
-.input-box input:valid ~ span,
+/* .input-box input:valid ~ span,
 .input-box input:focus ~ span{
 color: #45f3ff;
 transform: translateX(-10px) translateY(-30px);
 font-size: .75em;
-}
+} */
 
+.input-box input:focus ~ span,
+.input-box input:not(:placeholder-shown) ~ span {
+    color: #45f3ff;
+    transform: translateX(-10px) translateY(-30px);
+    font-size: .75em;
+}
 .input-box i{
 position: absolute;
 left: 0;
@@ -250,7 +274,7 @@ pointer-events: none;
 z-index: 9;
 }
 
-.input-box input:valid ~ i,
+.input-box input:not(:placeholder-shown) ~ i,
 .input-box input:focus ~ i{
 height: 44px;
 background: rgba(69, 243, 255, .5);
@@ -321,9 +345,9 @@ color: #d9138a;
   display: flex;
     justify-content: flex-end;   
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 1650px) {
   .popup-content{
-      background-image: none;
+      background-position: right;
   }
 }
 
@@ -350,12 +374,14 @@ color: #d9138a;
   background-size: cover;
 }
 
+
 .popup-website{
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
   flex-direction: column;
+  background: linear-gradient(to bottom, #346DA8,  #152240);
 }
 .website-content h4{
   text-align: left;
@@ -522,11 +548,11 @@ align-items: center;
   margin-bottom: 2px;
 }
 .hisabuk-popup{
-  background-color: white;
+  background-color: rgb(133, 133, 133);
 }
 }
 .whatsapp-banner{
- color: white;
+ color: rgb(218, 218, 218);
 }
 .whatsapp-banner h3{
 padding-bottom: 10px;
@@ -577,25 +603,25 @@ height: 70px;
 }
 .hisabuk-banner h1{
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: rgb(2, 2, 187);
 
 }
 .hisabuk-banner h3{
   font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: rgb(2, 2, 187);
   text-align: left;
 }
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 1200px) {
 
   .hisabuk-banner h1{
-    font-size: 32px;
-      margin-bottom: 70px;
+    font-size: 22px;
+      margin-bottom: 60px;
     
   }
   .hisabuk-banner h3{
-      font-size: 24px;
+      font-size: 16px;
       margin-bottom: 36px;
   }
   .hisabuk-banner img{
@@ -613,7 +639,9 @@ color: white;
 .schola-content h3{
 margin-bottom: 10px;
 }
+
 @media (min-width: 700px) {
+
 .schola-popup{
 background-image: url(../src/assets/Group\ 1.jpg);
 background-size: cover;
@@ -637,6 +665,9 @@ color: black;
 
 .schola-banner img{
   height: 50px;
+}
+.schola-popup{
+  background-color: #002d47;
 }
 }
 
@@ -793,5 +824,139 @@ text-transform: uppercase;
 background: linear-gradient(to right, #25bbbb 0%, #330867 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-font-size: 34px;
+font-size: 18px;
+}
+
+
+.vertical {
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+  -ms-transform-origin: right top 0;
+  -moz-transform-origin: right top 0;
+  -webkit-transform-origin: right top 0;
+  transform-origin: right top 0;
+  font-family: "Megrim", cursive;
+  right: 99%;
+  color: #000000;
+  padding-top: 1vw;
+  padding-right: 15vw;
+  font-size: 36px;
+  white-space: nowrap;
+  /* text-transform: uppercase; */
+  cursor: vertical-text;
+  position: absolute;
+  display: block;
+  height: auto;
+  direction: rtl;
+  z-index: 11;
+}
+.img1 {
+  z-index: 1;
+  position: relative;
+  display: block;
+  top: 0px;
+  left: 0px;
+  height: auto;
+  width: 100%;
+  padding-left: 10vw;
+}
+.wrap {
+  width: 50vw;
+  
+}
+.wrapv {
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 5;
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  /* width: 10vw; */
+}
+
+@media screen and (min-width: 576px) and (max-width: 1670px) {
+  .vertical{
+    font-size: 28px;
+    padding-right: 20vw;
+  }
+}
+@media screen and (max-width: 576px) {
+  .vertical{
+    font-size: 18px;
+    padding-right: 25vw;
+  }
+}
+
+.drop-shadow {
+  /* background: #000000AA; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  width: auto;
+  height: auto;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+.popup-box {
+  font-family: Calibri Light;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+   background: #a4f0fd; 
+  border-radius: 10px;
+  overflow: hidden;
+ 
+}
+.title {
+  height: 50px;
+  /* border-bottom: 1px solid #EEE; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #865FE0;
+  font-weight: bold;
+  word-spacing: 5px;
+  font-size: 20px;
+}
+.alert-msg {
+  flex: 1;
+  color: #4bff4b;
+  text-align: center;
+
+
+}
+.popup-box h1{
+  margin-bottom: 0px;
+  font-size: 18px;
+  color: rgb(29, 146, 29);
+}
+p {
+  font-size: 18px;
+}
+.close-btn {
+  
+ 
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  font-size: 26px;
+  font-weight: bold;
+  float: right;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+.popup-data{
+
+  padding-inline: 25px;
+  padding-bottom: 10px;
 }
