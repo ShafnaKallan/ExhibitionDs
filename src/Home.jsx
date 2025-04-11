@@ -17,6 +17,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { FaPhoneFlip } from "react-icons/fa6";
 import bnilogo from "./assets/bnilogo.png";
 import { IoClose } from "react-icons/io5";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Home = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -26,6 +27,8 @@ const Home = () => {
   const [ScholaPopUp, setScholaPopUp] = useState(false);
   const [whatsappPopUp, setWhatsappPopUp] = useState(false);
   const [servicePopup, setServicePopup] = useState(false);
+
+  const notify = () => toast("🛎️ Left-side notification!");
 
   const showPopup = () => {
     setPopupVisible(true);
@@ -153,17 +156,22 @@ const Home = () => {
                   <form action="" className="form1">
                     <div class="input-box">
                       <h2>Welcome to the exhibition! </h2>
-                      <input type="text" required />
+                      <input type="text" required  placeholder=" "/>
                       <span>Name</span>
                       <i></i>
                     </div>
                     <div class="input-box">
-                      <input type="number" required />
+                      <input type="number" required placeholder=" "/>
                       <span>Mobile No</span>
                       <i></i>
                     </div>
                     <div class="input-box">
-                      <input type="text" required />
+                      <input type="text" required placeholder=" "/>
+                      <span>Company Name</span>
+                      <i></i>
+                    </div>
+                    <div class="input-box">
+                      <input type="text" placeholder=" " />
                       <span>Company Name</span>
                       <i></i>
                     </div>
@@ -337,9 +345,27 @@ const Home = () => {
                           </select>
                         </div>
 
-                        <button type="submit" class="btn btn-default">
+                        <button type="submit" class="btn btn-default" onClick={notify}>
                           Send
                         </button>
+                        {/* <div>
+        <button type="submit" class="btn btn-default" onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div> */}
+      {/* <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer 
+         position="top-left"
+         
+         autoClose={3000}
+         hideProgressBar={false}
+         newestOnTop={false}
+         closeOnClick
+         rtl={false}
+         pauseOnFocusLoss
+         draggable
+         pauseOnHover/>
+      </div> */}
                       </form>
                     </div>
                   </div>
@@ -757,18 +783,38 @@ const Home = () => {
           </span>{" "}
         </a>
       </div> */}
-      <div class="drop-shadow ">
+
+{/* <div class="alert alert-secondary" role="alert">
+  A simple secondary alert—check it out!
+</div> */}
+
+         <div>
+        <button onClick={notify}>Notify!</button>
+        <ToastContainer />
+      </div>
+
+      {/* <div class="drop-shadow ">
         <div class="popup-box">
           <div class="alert-msg">
             <button class="close-btn" onclick="closePopup()">
               ×
             </button>
+            
           </div>
           <div className="popup-data">
-            <h1>Delete Your Account?</h1>
+          <h1><b>Your message has been sent</b></h1>
           </div>
         </div>
-      </div>
+      </div> */}
+
+{/* <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div> */}
     </div>
   );
 };

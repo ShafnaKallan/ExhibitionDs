@@ -122,7 +122,7 @@ align-items: center;
 .box2{
 position: relative;
 width: 370px;
-height: 500px;
+height: 530px;
 background: #1c1c1c;
 border-radius: 50px 5px;
 overflow: hidden;
@@ -137,7 +137,7 @@ position: absolute;
 top: -50%;
 left: -50%;
 width: 370px;
-height: 450px;
+height: 490px;
 background: linear-gradient(60deg, transparent, #45f3ff, #45f3ff);
 transform-origin: bottom right;
 animation: animate 6s linear infinite;
@@ -149,7 +149,7 @@ position: absolute;
 top: -50%;
 left: -50%;
 width: 370px;
-height: 450px;
+height: 700px;
 background: linear-gradient(60deg, transparent, #d9138a, #d9138a);
 transform-origin: bottom right;
 animation: animate 6s linear infinite;
@@ -229,7 +229,7 @@ transition: .5s;
 }
 @media screen and (max-width: 576px) {
 .box2{
-  height: 400px;
+  height: 410px;
 }
 .box2 h2{
  font-size: 24px;
@@ -239,7 +239,7 @@ transition: .5s;
 
 }
 .input-box input{
-  padding: 10px 10px 10px;
+  padding: 5px 5px 5px;
 }
 .form{
   padding: 10px 10px;
@@ -248,13 +248,19 @@ transition: .5s;
 }
 
 }
-.input-box input:valid ~ span,
+/* .input-box input:valid ~ span,
 .input-box input:focus ~ span{
 color: #45f3ff;
 transform: translateX(-10px) translateY(-30px);
 font-size: .75em;
-}
+} */
 
+.input-box input:focus ~ span,
+.input-box input:not(:placeholder-shown) ~ span {
+    color: #45f3ff;
+    transform: translateX(-10px) translateY(-30px);
+    font-size: .75em;
+}
 .input-box i{
 position: absolute;
 left: 0;
@@ -268,7 +274,7 @@ pointer-events: none;
 z-index: 9;
 }
 
-.input-box input:valid ~ i,
+.input-box input:not(:placeholder-shown) ~ i,
 .input-box input:focus ~ i{
 height: 44px;
 background: rgba(69, 243, 255, .5);
@@ -885,23 +891,26 @@ font-size: 18px;
 }
 
 .drop-shadow {
-  background: #000000AA;
-  display: flex;
+  /* background: #000000AA; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  justify-content: center; */
+  width: auto;
+  height: auto;
   position: fixed;
-  top: 0;
-  left: 0;
-  padding: 20px;
+  top: 10%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
 }
 .popup-box {
   font-family: Calibri Light;
   display: flex;
   flex-direction: column;
   position: relative;
-  background: #ffffff;
+   background: #a4f0fd; 
   border-radius: 10px;
   overflow: hidden;
  
@@ -920,7 +929,7 @@ font-size: 18px;
 }
 .alert-msg {
   flex: 1;
-  color: #333;
+  color: #4bff4b;
   text-align: center;
 
 
@@ -928,6 +937,7 @@ font-size: 18px;
 .popup-box h1{
   margin-bottom: 0px;
   font-size: 18px;
+  color: rgb(29, 146, 29);
 }
 p {
   font-size: 18px;
